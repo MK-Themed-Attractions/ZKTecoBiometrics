@@ -8,9 +8,9 @@ class AttendanceSummary extends Model
 {
     protected $connection = 'hris_db';
 
-    protected $table = 'attendance_summary';
+    protected $table = 'attendance_summaries';
 
-    protected $collection = 'attendance_summary';
+    protected $collection = 'attendance_summaries';
 
     protected $fillable = [
         'employee_id',
