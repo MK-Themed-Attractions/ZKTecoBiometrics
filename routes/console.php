@@ -43,3 +43,8 @@ Schedule::command('app:fetch-attendance')
     ->withoutOverlapping()->then(function () {
         Artisan::call('app:attandendance-summary-generate');
     });
+
+Schedule::command('app:sync-employee')
+    ->everyTenMinutes()
+    ->runInBackground()
+    ->withoutOverlapping();
