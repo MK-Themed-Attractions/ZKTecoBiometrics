@@ -12,11 +12,34 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Rats\Zkteco\Lib\ZKTeco;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+// Artisan::command('inspire', function () {
+//     $this->comment(Inspiring::quote());
+// })->purpose('Display an inspiring quote');
 
-Artisan::command('test', function () {
-    Log::info(Employee::where('id_number', "MK-521")->first()->withDeviceData());
-});
+// Artisan::command('test', function () {
+//     Log::info(Employee::where('id_number', "MK-521")->first()->withDeviceData());
+// });
+
+Schedule::command('app:fetch-attendance')
+    ->dailyAt('08:00')
+    ->runInBackground()
+    ->withoutOverlapping();
+
+Schedule::command('app:fetch-attendance')
+    ->dailyAt('12:00')
+    ->runInBackground()
+    ->withoutOverlapping();
+
+Schedule::command('app:fetch-attendance')
+    ->dailyAt('14:00')
+    ->runInBackground()
+    ->withoutOverlapping();
+
+Schedule::command('app:fetch-attendance')
+    ->dailyAt('20:00')
+    ->runInBackground()
+    ->withoutOverlapping()->then(function () {
+        Artisan::call('app:attandendance-summary-generate');
+    });

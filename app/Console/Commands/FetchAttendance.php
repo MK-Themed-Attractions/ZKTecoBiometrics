@@ -6,6 +6,7 @@ use App\Models\HRIS\Attendance;
 use App\Models\ZKTeco\ZKTecoDevice;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Throwable;
 use Log;
 
 class FetchAttendance extends Command
@@ -58,8 +59,8 @@ class FetchAttendance extends Command
 
                 $device->clearAttendance();
             }
-        } catch (Throwalbe $e) {
-            Log::error($e->getMessage());
+        } catch (Throwable $e) {
+            \Log::error($e->getMessage());
         }
     }
 }

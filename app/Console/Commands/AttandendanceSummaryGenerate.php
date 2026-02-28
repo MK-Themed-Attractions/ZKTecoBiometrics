@@ -50,7 +50,7 @@ class AttandendanceSummaryGenerate extends Command
                 $attendance_summary->save();
             }
         } catch (Throwable $e) {
-            Log::error($e->getMessage());
+            \Log::error($e->getMessage());
         }
     }
 }
